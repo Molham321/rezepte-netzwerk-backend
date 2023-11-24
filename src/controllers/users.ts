@@ -1,6 +1,9 @@
 
 import express from "express";
 
+import { authentication } from '../helpers';
+
+
 import { deleteUserById, getUserById, getUsers } from "../db/users";
 
 
@@ -33,15 +36,24 @@ export const deleteUser = async (req: express.Request, res: express.Response) =>
 export const updateUser = async (req: express.Request, res: express.Response) => {
   try {
     const { id } = req.params;
-    const { username } = req.body;
+    const { username, email, password } = req.body;
 
-    if (!username) {
-      return res.sendStatus(400);
+    const user = await getUserById(id).select('+authentication.salt +authentication.password');
+
+
+    if (username !== undefined) {
+      user.username = username;
     }
 
-    const user = await getUserById(id);
+    if (email !== undefined) {
+      user.email = email;
+    }
 
-    user.username = username;
+    if (password !== undefined) {
+
+      user.authentication.password = authentication(user.authentication.salt, password);
+    }
+
     await user.save();
 
     return res.status(200).json(user).end();
