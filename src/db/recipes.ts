@@ -5,7 +5,7 @@ const RecipesSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: false },
   imageURL: { type: String, required: false },
-  likes: { type: Number, required: false, default: 0 },
+  likes: { type: Number, required: true, default: 0 },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   createdDate: { type: Date, default: Date.now, required: true },
   prepTime: { type: Number, required: true, min: 0 },
@@ -48,6 +48,7 @@ export const RecipesModel = mongoose.model('Recipe', RecipesSchema);
 
 // Recipes Actions
 export const getRecipes = () => RecipesModel.find();
+export const getOwnerRecipes = (id: string) => RecipesModel.find({ createdBy: id });
 export const getRecipeById = (id: string) => RecipesModel.findById(id);
 export const createRecipe = (values: Record<string, any>) => new RecipesModel(values).save().then((recipe) => recipe.toObject());
 export const deleteRecipeById = (id: string) => RecipesModel.findOneAndDelete({ _id: id });
