@@ -6,6 +6,7 @@ const RecipesSchema = new mongoose.Schema({
   description: { type: String, required: false },
   imageURL: { type: String, required: false },
   likes: { type: Number, required: true, default: 0 },
+  servings: { type: Number, required: true, default: 1 },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   createdDate: { type: Date, default: Date.now, required: true },
   prepTime: { type: Number, required: true, min: 0 },
