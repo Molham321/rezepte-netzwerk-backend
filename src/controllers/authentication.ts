@@ -11,7 +11,7 @@ export const login = async (req: express.Request, res: express.Response) => {
       return res.sendStatus(400);
     }
 
-    const user = await getUserByEmail(email).select('+authentication.salt +authentication.password');
+    const user = await getUserByEmail(email).select('+authentication.salt +authentication.password +authentication.role');
 
     if (!user) {
       return res.sendStatus(400);
@@ -58,7 +58,7 @@ export const register = async (req: express.Request, res: express.Response) => {
       username,
       authentication: {
         salt,
-        password: authentication(salt, password),
+        password: authentication(salt, password)
       },
     });
 
