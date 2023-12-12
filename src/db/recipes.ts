@@ -54,3 +54,4 @@ export const getRecipeById = (id: string) => RecipesModel.findById(id);
 export const createRecipe = (values: Record<string, any>) => new RecipesModel(values).save().then((recipe) => recipe.toObject());
 export const deleteRecipeById = (id: string) => RecipesModel.findOneAndDelete({ _id: id });
 export const updateRecipeById = (id: string, values: Record<string, any>) => RecipesModel.findByIdAndUpdate(id, values);
+export const getRecipesByCategory = (category: string) => RecipesModel.find({ category: category });
