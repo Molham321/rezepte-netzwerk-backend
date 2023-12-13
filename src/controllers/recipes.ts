@@ -2,7 +2,7 @@
 import express from "express";
 
 import { get } from "lodash";
-import { getRecipes, getRecipeById, getOwnerRecipes, createRecipe, deleteRecipeById, updateRecipeById } from "../db/recipes";
+import { getRecipes, getRecipeById, getOwnerRecipes, createRecipe, deleteRecipeById, updateRecipeById, getRecipesByCategory } from "../db/recipes";
 
 export const getAllRecipes = async (req: express.Request, res: express.Response) => {
   try {
@@ -123,6 +123,19 @@ export const updateRecipe = async (req: express.Request, res: express.Response) 
     await recipe.save();
 
     return res.status(200).json(recipe).end();
+
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
+  }
+}
+
+export const getCategoryRecipes = async (req: express.Request, res: express.Response) => {
+  try {
+    const { category } = req.params;
+    const recipes = await getRecipesByCategory(category);
+
+    return res.status(200).json(recipes);
 
   } catch (error) {
     console.log(error);
