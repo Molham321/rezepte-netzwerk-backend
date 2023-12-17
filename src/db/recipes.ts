@@ -38,7 +38,10 @@ const RecipesSchema = new mongoose.Schema({
     type: [
       {
         type: String,
-        enum: ['category_01', 'category_02', 'category_03', 'category_04', 'category_05', 'Other'],
+        enum: ['category_01', 'category_02', 'category_03', 'category_04', 'category_05',
+               'Vorspeisen', 'Hauptspeisen', 'Desserts', 'Snacks', 'Getränke', 
+               'Spaghetti', 'Rind', 'Geflügel', 'Fisch', 'Schwein', 'Vegetarisch', 'Vegan',
+               'Italienisch', 'Deutsch', 'Japanisch', 'Indisch', 'Mexikanisch', 'Andere'],
       }
     ],
     required: true,
