@@ -45,13 +45,13 @@ export const getRecipe = async (req: express.Request, res: express.Response) => 
 
 export const createNewRecipe = async (req: express.Request, res: express.Response) => {
   try {
-    const { title, description, imageURL, prepTime, servings, ingredients, steps, category } = req.body;
+    const { title, description, imageURL, prepTime, servings, ingredients, steps, category, createdBy } = req.body;
 
-    if (!title || !description || !imageURL || !prepTime || !servings || !ingredients || !steps || !category) {
+    if (!title || !description || !imageURL || !prepTime || !servings || !ingredients || !steps || !category || !createdBy) {
       return res.sendStatus(400);
     }
 
-    const createdBy = get(req, 'identity._id');
+    // const createdBy = get(req, 'identity._id');
 
     const recipe = await createRecipe({
       title,

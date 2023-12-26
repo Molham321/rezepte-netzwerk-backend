@@ -7,7 +7,7 @@ const RecipesSchema = new mongoose.Schema({
   imageURL: { type: String, required: false },
   likes: { type: Number, required: true, default: 0 },
   servings: { type: Number, required: true, default: 1 },
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
   createdDate: { type: Date, default: Date.now, required: true },
   prepTime: { type: Number, required: true, min: 0 },
 
@@ -39,9 +39,9 @@ const RecipesSchema = new mongoose.Schema({
       {
         type: String,
         enum: ['category_01', 'category_02', 'category_03', 'category_04', 'category_05',
-               'Vorspeisen', 'Hauptspeisen', 'Desserts', 'Snacks', 'Getränke', 
-               'Spaghetti', 'Rind', 'Geflügel', 'Fisch', 'Schwein', 'Vegetarisch', 'Vegan',
-               'Italienisch', 'Deutsch', 'Japanisch', 'Indisch', 'Mexikanisch', 'Andere'],
+          'Vorspeisen', 'Hauptspeisen', 'Desserts', 'Snacks', 'Getränke',
+          'Spaghetti', 'Rind', 'Geflügel', 'Fisch', 'Schwein', 'Vegetarisch', 'Vegan',
+          'Italienisch', 'Deutsch', 'Japanisch', 'Indisch', 'Mexikanisch', 'Andere'],
       }
     ],
     required: true,

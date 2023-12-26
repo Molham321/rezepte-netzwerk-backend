@@ -8,7 +8,7 @@ export default (router: express.Router) => {
   router.get('/recipes', getAllRecipes);
   router.get('/recipes/owner/:id', getAllOwnerRecipes);
   router.get('/recipes/:id', getRecipe);
-  router.post('/recipes/create', isAuthenticated, createNewRecipe);
+  router.post('/recipes/create', createNewRecipe);
   router.patch('/recipes/:id', isAuthenticated, isRecipesOwner, updateRecipe);
   router.delete('/recipes/:id', isAuthenticated, isRecipesOwner, deleteRecipe);
   router.get('/recipes/category/:category', getCategoryRecipes);
