@@ -62,7 +62,7 @@ export const createNewRecipe = async (req: express.Request, res: express.Respons
       servings,
       ingredients,
       steps,
-      category,
+      category
     });
 
     return res.status(200).json(recipe).end();
@@ -142,4 +142,25 @@ export const getCategoryRecipes = async (req: express.Request, res: express.Resp
     console.log(error);
     return res.sendStatus(400);
   }
+}
+
+export const likeRecipeById = async (req: express.Request, res: express.Response) => {
+    try {
+      const { id } = req.params;
+      const { likedBy } = req.body;
+  
+      const recipe = await getRecipeById(id);
+
+      if (likedBy !== undefined) {
+        recipe.likedBy = likedBy
+      }
+
+      await recipe.save();
+
+      return res.status(200).json(recipe).end();
+  
+    } catch (error) {
+      console.log(error);
+      return res.sendStatus(400);
+    }
 }
