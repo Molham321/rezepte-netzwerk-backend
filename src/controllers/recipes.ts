@@ -148,6 +148,8 @@ export const likeRecipeById = async (req: express.Request, res: express.Response
     try {
       const { id } = req.params;
       const { likedBy } = req.body;
+
+      console.log('liked by: ' + likedBy);
   
       const recipe = await getRecipeById(id);
 
