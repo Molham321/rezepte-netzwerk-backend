@@ -46,6 +46,20 @@ const RecipesSchema = new mongoose.Schema({
     ],
     required: true,
   },
+
+  likedBy: {
+    type: [
+      { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    ],
+    required: false
+  },
+
+  savedBy: {
+    type: [
+      { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    ],
+    required: false
+  }
 });
 
 export const RecipesModel = mongoose.model('Recipe', RecipesSchema);
@@ -58,3 +72,8 @@ export const createRecipe = (values: Record<string, any>) => new RecipesModel(va
 export const deleteRecipeById = (id: string) => RecipesModel.findOneAndDelete({ _id: id });
 export const updateRecipeById = (id: string, values: Record<string, any>) => RecipesModel.findByIdAndUpdate(id, values);
 export const getRecipesByCategory = (category: string) => RecipesModel.find({ category: category });
+
+export const likeRecipe = (id: string, values: Record<string, any>) => RecipesModel.findByIdAndUpdate(id, values);
+export const saveRecipe = (id: string, values: Record<string, any>) => RecipesModel.findByIdAndUpdate(id, values);
+
+export const getSavedRecipesByUser = (userId: string) => RecipesModel.find({ savedBy: userId });

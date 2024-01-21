@@ -2,7 +2,7 @@
 import express from "express";
 
 import { get } from "lodash";
-import { getRecipes, getRecipeById, getOwnerRecipes, createRecipe, deleteRecipeById, updateRecipeById, getRecipesByCategory } from "../db/recipes";
+import { getRecipes, getRecipeById, getOwnerRecipes, createRecipe, deleteRecipeById, updateRecipeById, getRecipesByCategory, likeRecipe, saveRecipe, getSavedRecipesByUser } from "../db/recipes";
 
 export const getAllRecipes = async (req: express.Request, res: express.Response) => {
   try {
@@ -62,7 +62,7 @@ export const createNewRecipe = async (req: express.Request, res: express.Respons
       servings,
       ingredients,
       steps,
-      category,
+      category
     });
 
     return res.status(200).json(recipe).end();
@@ -135,6 +135,65 @@ export const getCategoryRecipes = async (req: express.Request, res: express.Resp
   try {
     const { category } = req.params;
     const recipes = await getRecipesByCategory(category);
+
+    return res.status(200).json(recipes);
+
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
+  }
+}
+
+export const likeRecipeById = async (req: express.Request, res: express.Response) => {
+    try {
+      const { id } = req.params;
+      const { likedBy } = req.body;
+
+      console.log('liked by: ' + likedBy);
+  
+      const recipe = await getRecipeById(id);
+
+      if (likedBy !== undefined) {
+        recipe.likedBy = likedBy
+      }
+
+      await recipe.save();
+
+      return res.status(200).json(recipe).end();
+  
+    } catch (error) {
+      console.log(error);
+      return res.sendStatus(400);
+    }
+}
+
+export const saveRecipeById = async (req: express.Request, res: express.Response) => {
+  try {
+    const { id } = req.params;
+    const { savedBy } = req.body;
+
+    console.log('saved by: ' + savedBy);
+
+    const recipe = await getRecipeById(id);
+
+    if (savedBy !== undefined) {
+      recipe.savedBy = savedBy
+    }
+
+    await recipe.save();
+
+    return res.status(200).json(recipe).end();
+
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
+  }
+}
+
+export const getSavedRecipes = async (req: express.Request, res: express.Response) => {
+  try {
+    const { userId } = req.params;
+    const recipes = await getSavedRecipesByUser(userId);
 
     return res.status(200).json(recipes);
 
