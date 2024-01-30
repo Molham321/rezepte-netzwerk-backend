@@ -1,7 +1,7 @@
 
 import express from "express";
 
-import { get } from "lodash";
+import { get, toNumber } from "lodash";
 import { getRecipes, getRecipeById, getOwnerRecipes, createRecipe, deleteRecipeById, updateRecipeById, getRecipesByCategory, likeRecipe, saveRecipe, getSavedRecipesByUser } from "../db/recipes";
 
 export const getAllRecipes = async (req: express.Request, res: express.Response) => {
@@ -196,6 +196,48 @@ export const getSavedRecipes = async (req: express.Request, res: express.Respons
     const recipes = await getSavedRecipesByUser(userId);
 
     return res.status(200).json(recipes);
+
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
+  }
+}
+
+export const postCommentById = async (req: express.Request, res: express.Response) => {
+  try {
+    const { id } = req.params;
+    const { comment } = req.body;
+
+    const recipe = await getRecipeById(id);
+
+    if (comment !== undefined) {
+      recipe.comments.push(comment)
+    }
+  
+    await recipe.save();
+
+    return res.status(200).json(recipe).end();
+
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
+  }
+}
+
+// NICHT _ID SONDERN INDEX IM ARRAY ALS COMMENTID MITSCHICKEN
+export const deleteCommentById = async (req: express.Request, res: express.Response) => {
+  try {
+    const { id, commentId } = req.params;
+
+    const recipe = await getRecipeById(id);
+
+    if (commentId !== undefined) {
+      recipe.comments.splice(toNumber(commentId), 1);
+    }
+  
+    await recipe.save();
+
+    return res.status(200).json(recipe).end();
 
   } catch (error) {
     console.log(error);
