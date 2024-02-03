@@ -227,12 +227,13 @@ export const postCommentById = async (req: express.Request, res: express.Respons
 // NICHT _ID SONDERN INDEX IM ARRAY ALS COMMENTID MITSCHICKEN
 export const deleteCommentById = async (req: express.Request, res: express.Response) => {
   try {
-    const { id, commentId } = req.params;
+    const { id } = req.params;
+    const { commentIndex } = req.body;
 
     const recipe = await getRecipeById(id);
 
-    if (commentId !== undefined) {
-      recipe.comments.splice(toNumber(commentId), 1);
+    if (commentIndex !== undefined) {
+      recipe.comments.splice(commentIndex, 1);
     }
   
     await recipe.save();

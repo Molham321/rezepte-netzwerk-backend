@@ -79,4 +79,4 @@ export const saveRecipe = (id: string, values: Record<string, any>) => RecipesMo
 export const getSavedRecipesByUser = (userId: string) => RecipesModel.find({ savedBy: userId });
 
 export const postComment = (id: string, values: Record<string, any>) => RecipesModel.findByIdAndUpdate(id, values);
-export const deleteComment = (id: string, commentId: string) => RecipesModel.findById(id);
+export const deleteComment = (id: string, commentIndex: number) => RecipesModel.findById(id);

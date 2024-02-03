@@ -19,5 +19,5 @@ export default (router: express.Router) => {
   router.get('/recipes/saved/:userId', getSavedRecipes);
 
   router.post('/recipes/comments/create/:id', postCommentById);
-  router.post('/recipes/comments/delete/:id/:commentId', deleteCommentById);
+  router.post('/recipes/comments/delete/:id', deleteCommentById);
 };
