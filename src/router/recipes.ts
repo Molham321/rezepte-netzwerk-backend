@@ -1,7 +1,7 @@
 
 import express from "express";
 
-import { getAllRecipes, getAllOwnerRecipes, getRecipe, createNewRecipe, deleteRecipe, updateRecipe, getCategoryRecipes, likeRecipeById, saveRecipeById, getSavedRecipes } from "../controllers/recipes";
+import { getAllRecipes, getAllOwnerRecipes, getRecipe, createNewRecipe, deleteRecipe, updateRecipe, getCategoryRecipes, likeRecipeById, saveRecipeById, getSavedRecipes, postCommentById, deleteCommentById } from "../controllers/recipes";
 import { isAuthenticated, isRecipesOwner } from "../middlewares";
 
 export default (router: express.Router) => {
@@ -17,4 +17,7 @@ export default (router: express.Router) => {
   router.post('/recipes/save/:id', saveRecipeById);
 
   router.get('/recipes/saved/:userId', getSavedRecipes);
+
+  router.post('/recipes/comments/create/:id', postCommentById);
+  router.post('/recipes/comments/delete/:id', deleteCommentById);
 };
