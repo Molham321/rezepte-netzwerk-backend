@@ -1,6 +1,6 @@
 # Rezepte Netzwerk Backend
 
-Diese Dokumentation dient als Hilfestellung für die Einrichtung und Installation des Backend-Servers für Rezepte Netzwerk.
+Diese Dokumentation dient als Hilfestellung für die Einrichtung und Installation des Backend-Servers für das Rezepte Netzwerk.
 
 ## Installation
 
@@ -35,7 +35,7 @@ Bitte führen Sie zur Installation der Pakete den folgenden Befehl aus: ```npm i
 
 ### 3. Datenbank
 
-Wenn Sie keinen Zugriff auf unsere MongoDB-Datenbank haben, kontaktieren Sie uns bitte, damit wir Sie einladen können. Zugriff wurde bereits für Herrn Petterman gewährt.
+Wenn Sie keinen Zugriff auf unsere MongoDB-Datenbank haben, kontaktieren Sie uns bitte, damit wir Sie einladen können. Zugriff wurde bereits für Herrn Petermann gewährt.
 
 Wenn Sie Zugriff auf unsere MongoDB haben, müssen Sie nichts weiter tun. Sie können den Server starten und problemlos mit den Daten über Postman oder das Frontend arbeiten. Sie können die Daten auch jederzeit unter folgendem Link anzeigen und bei Bedarf bearbeiten: [MongoDB Cloud](https://cloud.mongodb.com/v2/654bc71a622923799f383ba3#/clusters/detail/RezepteNetzwerk)
 
