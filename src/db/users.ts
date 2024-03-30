@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 
 // User Config
@@ -11,14 +12,6 @@ const UserSchema = new mongoose.Schema({
     sessionToken: { type: String, select: false },
     role: { type: String, select: false, default: 'user' }
   },
-
-  // savedRecipes: {
-  //   type: [
-  //     { type: mongoose.Schema.Types.ObjectId, ref: 'Recipe' }
-  //   ],
-  //   required: false
-  // },
-
 });
 
 export const UserModel = mongoose.model('User', UserSchema);

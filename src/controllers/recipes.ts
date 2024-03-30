@@ -1,7 +1,6 @@
 
 import express from "express";
 
-import { get, toNumber } from "lodash";
 import { getRecipes, getRecipeById, getOwnerRecipes, createRecipe, deleteRecipeById, updateRecipeById, getRecipesByCategory, likeRecipe, saveRecipe, getSavedRecipesByUser } from "../db/recipes";
 
 export const getAllRecipes = async (req: express.Request, res: express.Response) => {
@@ -50,8 +49,6 @@ export const createNewRecipe = async (req: express.Request, res: express.Respons
     if (!title || !description || !imageURL || !prepTime || !servings || !ingredients || !steps || !category || !createdBy) {
       return res.sendStatus(400);
     }
-
-    // const createdBy = get(req, 'identity._id');
 
     const recipe = await createRecipe({
       title,
@@ -145,26 +142,26 @@ export const getCategoryRecipes = async (req: express.Request, res: express.Resp
 }
 
 export const likeRecipeById = async (req: express.Request, res: express.Response) => {
-    try {
-      const { id } = req.params;
-      const { likedBy } = req.body;
+  try {
+    const { id } = req.params;
+    const { likedBy } = req.body;
 
-      console.log('liked by: ' + likedBy);
-  
-      const recipe = await getRecipeById(id);
+    console.log('liked by: ' + likedBy);
 
-      if (likedBy !== undefined) {
-        recipe.likedBy = likedBy
-      }
+    const recipe = await getRecipeById(id);
 
-      await recipe.save();
-
-      return res.status(200).json(recipe).end();
-  
-    } catch (error) {
-      console.log(error);
-      return res.sendStatus(400);
+    if (likedBy !== undefined) {
+      recipe.likedBy = likedBy
     }
+
+    await recipe.save();
+
+    return res.status(200).json(recipe).end();
+
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
+  }
 }
 
 export const saveRecipeById = async (req: express.Request, res: express.Response) => {
@@ -213,7 +210,7 @@ export const postCommentById = async (req: express.Request, res: express.Respons
     if (comment !== undefined) {
       recipe.comments.push(comment)
     }
-  
+
     await recipe.save();
 
     return res.status(200).json(recipe).end();
@@ -224,7 +221,6 @@ export const postCommentById = async (req: express.Request, res: express.Respons
   }
 }
 
-// NICHT _ID SONDERN INDEX IM ARRAY ALS COMMENTID MITSCHICKEN
 export const deleteCommentById = async (req: express.Request, res: express.Response) => {
   try {
     const { id } = req.params;
@@ -235,7 +231,7 @@ export const deleteCommentById = async (req: express.Request, res: express.Respo
     if (commentIndex !== undefined) {
       recipe.comments.splice(commentIndex, 1);
     }
-  
+
     await recipe.save();
 
     return res.status(200).json(recipe).end();

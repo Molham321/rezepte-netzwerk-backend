@@ -1,3 +1,4 @@
+
 import crypto from 'crypto';
 
 const SECRET = 'ADMIN-REST-API';
