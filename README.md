@@ -61,8 +61,8 @@ Register | POST | http://localhost:8080/auth/register | email, password, usernam
 
 Funktion | Variante | Pfad | Erforderliche Parameter  | Rückgabe 
 --- |--- | --- | --- | ---
-GetAll | GET | http://localhost:8080/users | - | Users
-GetOne | GET | http://localhost:8080/users/:id | - | User
+GetAll | GET    | http://localhost:8080/users | - | Users
+GetOne | GET    | http://localhost:8080/users/:id | - | User
 Delete | DELETE | http://localhost:8080/users/:id | - | User
 Update | UPDATE | http://localhost:8080/users/:id | - | User
 
@@ -70,18 +70,18 @@ Update | UPDATE | http://localhost:8080/users/:id | - | User
 
 Funktion | Variante | Pfad | Erforderliche Parameter  | Rückgabe 
 --- |--- | --- | --- | ---
-getAllRecipes | GET | http://localhost:8080/recipes | - | Recipes
+getAllRecipes      | GET | http://localhost:8080/recipes | - | Recipes
 getAllOwnerRecipes | GET | http://localhost:8080/recipes/owner/:id | - | Recipes
-getRecipe | GET | http://localhost:8080/recipes/:id | - | Recipe
+getRecipe          | GET | http://localhost:8080/recipes/:id | - | Recipe
 getCategoryRecipes | GET | http://localhost:8080/recipes/category/:category | - | Recipes
-createNewRecipe | POST | http://localhost:8080/recipes/create | - | Recipe
-updateRecipe | PATCH | http://localhost:8080/recipes/:id | - | Recipe
-deleteRecipe | DELETE | http://localhost:8080/recipes/:id | - | Recipe
-likeRecipeById | POST | http://localhost:8080/recipes/like/:id | - | Recipe
-saveRecipeById | POST | http://localhost:8080/recipes/save/:id | - | Recipe
-getSavedRecipes | GET | http://localhost:8080/recipes/saved/:userId | - | Recipes
-postCommentById   | POST | http://localhost:8080/recipes/comments/create/:id | - | Recipe
-deleteCommentById | POST | http://localhost:8080/recipes/comments/delete/:id | - | Recipe
+createNewRecipe    | POST | http://localhost:8080/recipes/create | title, description, imageURL, prepTime, servings, ingredients, steps, category    | Recipe
+updateRecipe       | PATCH | http://localhost:8080/recipes/:id | title, description, imageURL, prepTime, servings, ingredients, steps, category           | Recipe
+deleteRecipe       | DELETE | http://localhost:8080/recipes/:id | - | Recipe
+likeRecipeById     | POST | http://localhost:8080/recipes/like/:id | - | Recipe
+saveRecipeById     | POST | http://localhost:8080/recipes/save/:id | - | Recipe
+getSavedRecipes    | GET | http://localhost:8080/recipes/saved/:userId | - | Recipes
+postCommentById    | POST | http://localhost:8080/recipes/comments/create/:id | - | Recipe
+deleteCommentById  | POST | http://localhost:8080/recipes/comments/delete/:id | - | Recipe
 
 
 
