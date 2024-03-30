@@ -64,24 +64,53 @@ Funktion | Variante | Pfad | Erforderliche Parameter  | Rückgabe
 GetAll | GET    | http://localhost:8080/users | - | Users
 GetOne | GET    | http://localhost:8080/users/:id | - | User
 Delete | DELETE | http://localhost:8080/users/:id | - | User
-Update | UPDATE | http://localhost:8080/users/:id | - | User
+Update | POST   | http://localhost:8080/users/:id | email, password, username | User
 
 ### Recipes
 
 Funktion | Variante | Pfad | Erforderliche Parameter  | Rückgabe 
 --- |--- | --- | --- | ---
 getAllRecipes      | GET | http://localhost:8080/recipes | - | Recipes
-getAllOwnerRecipes | GET | http://localhost:8080/recipes/owner/:id | - | Recipes
+getAllOwnerRecipes | GET | http://localhost:8080/recipes/owner/:ownerId | - | Recipes
 getRecipe          | GET | http://localhost:8080/recipes/:id | - | Recipe
 getCategoryRecipes | GET | http://localhost:8080/recipes/category/:category | - | Recipes
 createNewRecipe    | POST | http://localhost:8080/recipes/create | title, description, imageURL, prepTime, servings, ingredients, steps, category    | Recipe
 updateRecipe       | PATCH | http://localhost:8080/recipes/:id | title, description, imageURL, prepTime, servings, ingredients, steps, category           | Recipe
 deleteRecipe       | DELETE | http://localhost:8080/recipes/:id | - | Recipe
 likeRecipeById     | POST | http://localhost:8080/recipes/like/:id | - | Recipe
-saveRecipeById     | POST | http://localhost:8080/recipes/save/:id | - | Recipe
-getSavedRecipes    | GET | http://localhost:8080/recipes/saved/:userId | - | Recipes
-postCommentById    | POST | http://localhost:8080/recipes/comments/create/:id | - | Recipe
-deleteCommentById  | POST | http://localhost:8080/recipes/comments/delete/:id | - | Recipe
+saveRecipeById     | POST | http://localhost:8080/recipes/save/:id | likedBy | Recipe
+getSavedRecipes    | GET | http://localhost:8080/recipes/saved/:userId | savedBy | Recipes
+postCommentById    | POST | http://localhost:8080/recipes/comments/create/:id | comment | Recipe
+deleteCommentById  | POST | http://localhost:8080/recipes/comments/delete/:id | commentIndex | Recipe
 
+
+## Models
+
+### User
+Feld | Typ 
+--- |---
+id | String
+email | String
+username | String
+authentication | Objekt {password: String, salt: String, sessionToken: String, role: String }
+
+### Recipes
+Feld | Typ
+--- |---
+id | String
+title | String
+description | String
+imageURL | String
+likes | Number
+servings | Number
+createdBy | mongoose.Schema.Types.ObjectId
+createdDate | Date
+prepTime | Number
+ingredients | Objekt[] {amount: Number, unit: String, ingredient: String}
+steps | Objekt[] {order: Number, description: String}
+comments | Objekt[] {createdBy: mongoose.Schema.Types.ObjectId, createdDate: Date, comment: String}
+category | type[] {type: String, enum: [...] }
+likedBy | Objekt[] {type: mongoose.Schema.Types.ObjectId}
+savedBy | Objekt[] {type: mongoose.Schema.Types.ObjectId}
 
 
